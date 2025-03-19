@@ -17,10 +17,10 @@ public class JwtUtil {
     public String generateToken(String username, Long userId, String role) {
         return Jwts.builder()
                 .setSubject(username)
-                .claim("userId", userId) // Добавляем userId
+                .claim("userId", userId)
                 .claim("role", role)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 час
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -32,7 +32,7 @@ public class JwtUtil {
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
-                .getSubject(); // Возвращает "sub" из токена
+                .getSubject();
     }
 
     public String extractRole(String token) {
